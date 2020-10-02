@@ -62,7 +62,9 @@ app.post('/api/user/login', (req, res) => {
                 if (err) {return res.status(400).send(err);}
 
                 // 생성한 token을 쿠키에 저장한다.
-                res.cookie('x_auth', user.token).status(200).json({loginSuccess: true, userId: user._id});
+                res.cookie('x_auth', user.token)
+                    .status(200)
+                    .json({loginSuccess: true, userId: user._id});
             });
         });
     });
@@ -80,6 +82,19 @@ app.get('/api/user/auth', auth, (req, res) => {
         role: req.user.role,
         image: req.user.image
     });
+});
+
+app.get('/api/user/logout', auth, (req, res) => {
+    User.findOneAndUpdate(
+        {_id: req.user._id},
+        {token: ''},
+        (err, user) => {
+            if (err) {return res.json({success: false, err});}
+            return res.status(200).send({
+                success: true
+            });
+        }
+    );
 });
 
 app.listen(port, () => {

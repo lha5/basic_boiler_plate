@@ -1,7 +1,7 @@
-const {User} = require('./model/User');
+const {User} = require('../model/User');
 
 // 인증 처리
-let auth = ({req, res, next}) => {
+let auth = (req, res, next) => {
 
     // 클라이언트 쿠키에서 토큰을 가져온다.
     let token = req.cookies.x_auth;

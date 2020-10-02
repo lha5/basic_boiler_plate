@@ -2,11 +2,11 @@
   "name": "basic_boiler_plate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "devmode": "nodemon index.js"
+    "start": "node server/index.js",
+    "devmode": "nodemon server/index.js"
   },
   "author": "HA",
   "license": "ISC",

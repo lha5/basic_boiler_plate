@@ -35,7 +35,7 @@ const userSchema = mongoose.Schema({
 });
 
 userSchema.pre('save', function (next) {
-    const user = this;
+    let user = this;
 
     // 비밀번호를 변경 할 때만 암호화 하기(이메일이나 이름을 변경할 때에는 동작하지 않음)
     if (user.isModified('password')) {
@@ -66,7 +66,7 @@ userSchema.methods.comparePassword = function (plainPassword, cb) {
 }
 
 userSchema.methods.generateToken = function (cb) {
-    const user = this;
+    let user = this;
 
     // jsonwebtoken을 이용해서 token 생성하기
     const token = jwt.sign(user._id.toHexString(), 'secretToken');
@@ -79,7 +79,7 @@ userSchema.methods.generateToken = function (cb) {
 }
 
 userSchema.statics.findByToken = function (token, cb) {
-    const user = this;
+    let user = this;
 
     // 토큰을 decode 한다.
     jwt.verify(token, 'secretToken', function (err, decoded) {
@@ -88,7 +88,7 @@ userSchema.statics.findByToken = function (token, cb) {
         user.findOne({
             '_id': decoded,
             'token': token
-        }, function (err, use) {
+        }, function (err, user) {
             if (err) {return cb(err);}
             cb(null, user);
         });
