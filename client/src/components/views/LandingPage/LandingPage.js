@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
+import {Box, Heading, Main} from 'grommet';
 
 function LandingPage() {
 
@@ -8,9 +9,14 @@ function LandingPage() {
     }, []);
 
     return (
-        <div>
-            LandingPage
-        </div>
+        <Main>
+            <Box
+                align="center"
+                justify="center"
+            >
+                <Heading>시작 페이지</Heading>
+            </Box>
+        </Main>
     );
 }
 
